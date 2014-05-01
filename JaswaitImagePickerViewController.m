@@ -16,11 +16,14 @@
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic) UIImagePickerController *imagePickerController;
 
+- (void) scrollViewDoubleTapped:(UITapGestureRecognizer *) recognizer;
+- (void) handleSwipeUpFrom:(UISwipeGestureRecognizer *) recognizer;
+
 @end
 
 @implementation JaswaitImagePickerViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -29,18 +32,34 @@
     return self;
 }
 
-- (void)viewDidLoad
+- (void) viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
     self.loadImageBtn.action = @selector(showImagePickerFromLibrary);
     self.loadImageBtn.target = self;
     
     self.imageScrollView.delegate = self;
     self.imageScrollView.maximumZoomScale = 20.0f;
+    
+    [self setupGestureRecognizer];
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void) setupGestureRecognizer
+{
+    UITapGestureRecognizer *doubleTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                    action:@selector(scrollViewDoubleTapped:)];
+    doubleTapRecognizer.numberOfTapsRequired = 2;
+    doubleTapRecognizer.numberOfTouchesRequired = 1;
+    [self.imageScrollView addGestureRecognizer:doubleTapRecognizer];
+    
+    UISwipeGestureRecognizer* swipeUpGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self
+                                                           action:@selector(handleSwipeUpFrom:)];
+    swipeUpGestureRecognizer.direction = UISwipeGestureRecognizerDirectionUp;
+    [self.imageScrollView addGestureRecognizer:swipeUpGestureRecognizer];
+}
+
+- (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self refreshZoomScale];
@@ -49,7 +68,7 @@
 - (void) didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    self.imageView = nil;
 }
 
 - (void) showImagePickerFromLibrary
@@ -109,6 +128,7 @@
     [imageView setImage:image];
     imageView.frame = (CGRect){.origin=CGPointMake(0.0f, 0.0f), .size=image.size};
     self.imageView = imageView;
+    
     [self.imageScrollView addSubview:self.imageView];
     self.imageScrollView.contentSize = image.size;
     
@@ -119,5 +139,16 @@
     self.imageScrollView.minimumZoomScale = [self getMinZoomScale:self.imageScrollView];
     self.imageScrollView.zoomScale = [self getDefaultScale:self.imageScrollView];
 }
+
+- (void)scrollViewDoubleTapped:(UITapGestureRecognizer*)recognizer
+{
+    [self.imageScrollView setZoomScale:1.0f animated:YES];
+}
+
+- (void) handleSwipeUpFrom:(UISwipeGestureRecognizer *) recognizer
+{
+    [self showImagePickerFromLibrary];
+}
+
 
 @end
