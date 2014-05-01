@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="rim-yV-EZ2">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <scenes>
+        <!--Jaswait Image Picker View Controller - ImagePicker-->
+        <scene sceneID="QoR-Gb-uUn">
+            <objects>
+                <viewController title="ImagePicker" automaticallyAdjustsScrollViewInsets="NO" id="1Fk-hY-WIi" customClass="JaswaitImagePickerViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="C7d-1m-Wxo"/>
+                        <viewControllerLayoutGuide type="bottom" id="IVo-nB-02j"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mdG-vV-x7K">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pPo-sW-Yoc">
+                                <rect key="frame" x="0.0" y="65" width="320" height="505"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="pPo-sW-Yoc" firstAttribute="top" secondItem="C7d-1m-Wxo" secondAttribute="bottom" constant="1" id="7g3-LQ-qnP"/>
+                            <constraint firstItem="pPo-sW-Yoc" firstAttribute="leading" secondItem="mdG-vV-x7K" secondAttribute="leading" id="7iI-LY-zvc"/>
+                            <constraint firstAttribute="trailing" secondItem="pPo-sW-Yoc" secondAttribute="trailing" id="Fjk-jg-JrP"/>
+                            <constraint firstAttribute="bottom" secondItem="pPo-sW-Yoc" secondAttribute="bottom" constant="-2" id="byo-kF-B1e"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Image Picker" id="Bb7-ai-gR4">
+                        <barButtonItem key="rightBarButtonItem" systemItem="organize" id="zan-uY-iJH"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="imageScrollView" destination="pPo-sW-Yoc" id="Vap-FP-hGF"/>
+                        <outlet property="loadImageBtn" destination="zan-uY-iJH" id="gxI-ef-uCl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hp3-e3-wHH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="821" y="62"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="gcr-JR-FP0">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rim-yV-EZ2" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hIJ-GI-pQa">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="1Fk-hY-WIi" kind="relationship" relationship="rootViewController" id="EbE-Oy-dnH"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wZK-Bg-rFc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="364" y="62"/>
+        </scene>
+    </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>
